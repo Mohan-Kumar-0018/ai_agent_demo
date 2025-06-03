@@ -14,20 +14,6 @@ logger = logging.getLogger(__name__)
 # Load environment variables (for GITHUB_ACCESS_TOKEN)
 load_dotenv()
 
-# Define tool hooks for logging
-def on_tool_start(tool_name, **kwargs):
-    logger.info(f"Tool Call Started: {tool_name}")
-    logger.info(f"Arguments: {kwargs}")
-
-def on_tool_end(tool_name, result, **kwargs):
-    logger.info(f"Tool Call Completed: {tool_name}")
-    logger.info(f"Result: {result}")
-    logger.info("---")
-
-def on_tool_error(tool_name, error, **kwargs):
-    logger.error(f"Tool Call Error in {tool_name}: {error}")
-    logger.error("---")
-
 # Initialize a single GitHub agent with all tools enabled
 github_agent = Agent(
     name="GitHub Agent",
@@ -36,11 +22,6 @@ github_agent = Agent(
     tools=[GithubTools(get_repository_stars=True, create_branch=True, get_pull_request_count=True,get_pull_requests=True,get_pull_request_changes=True, get_pull_request_with_details=True, get_pull_request_comments=True)],
     instructions="Help with GitHub operations including fetching repository information, pull requests, issues, etc.",
     show_tool_calls=True,
-    tool_hooks={
-        "on_tool_start": on_tool_start,
-        "on_tool_end": on_tool_end,
-        "on_tool_error": on_tool_error
-    },
 )
 
 def run_github_query(query):
@@ -74,3 +55,6 @@ if __name__ == "__main__":
     result = run_github_query(query)
     print(f"Result:\n{result}")
 
+
+# python github_agent.py --query="What are the test cases added in PR 3871 in repo : shopuptech/warehouse_mgmt_service ?"
+# python github_agent.py --query="What are the changes in PR ID 3871 in repo: shopuptech/warehouse_mgmt_service ?"
