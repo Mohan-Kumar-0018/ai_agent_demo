@@ -40,18 +40,73 @@ def run_github_query(query):
     
     return response.content
 
+def get_test_cases_query(pr_id, repo):
+    """
+    Generate a query to get test cases added in a PR
+    
+    Args:
+        pr_id (str): The PR ID
+        repo (str): The repository name
+        
+    Returns:
+        str: The formatted query
+    """
+    return f"""What are the test cases added in PR {pr_id} in repo : {repo} ?
+    Give in Below format:
+    File name: <file_name>
+    Test cases added: 
+     Failure cases:
+      Context: <context>
+      Error: <error>
+     Success case:
+      Context: <context>
+      Asserted fields: <asserted_fields>"""
+
+def get_curl_request_query(pr_id, repo):
+    """
+    Generate a query to get sample curl requests for APIs added/changed in a PR
+    
+    Args:
+        pr_id (str): The PR ID
+        repo (str): The repository name
+        
+    Returns:
+        str: The formatted query
+    """
+    return f"""
+    Give a sample curl request for the new API added/ existing API changed in PR {pr_id} in repo: {repo} ?
+
+    Use BaseUrl: https://mokamap.shopups2.xyz/sc2_admin/ for all requests
+
+    Identify the api routes and give in below format:
+
+    Sample curl:
+    curl --location 'https://mokamap.shopups2.xyz/sc2_admin/group_orders/list_orders?warehouse_id=871&id=69347' \
+    --header 'Cookie: __st__2__=XXXXX'
+    Return the curl request
+    """
+
 # Command line interface
 if __name__ == "__main__":
     # Set up argument parser
     parser = argparse.ArgumentParser(description="GitHub Agent Query Interface")
-    parser.add_argument("--query", "-q", type=str, default="What is the status of the open PRs in repo: Mohan-Kumar-0018/rag-demo", 
-                        help="Specific query about the repository")
+    parser.add_argument("--pr", type=str, required=True, help="Pull Request ID")
+    parser.add_argument("--repo", type=str, required=True, help="Repository name (format: owner/repo)")
+    parser.add_argument("--type", type=str, choices=["test_cases", "curl"], required=True, 
+                      help="Query type: 'test_cases' for test case analysis, 'curl' for curl request examples")
+    parser.add_argument("--custom-query", type=str, help="Run a custom query instead of the predefined ones")
     
     args = parser.parse_args()
     
-    query = args.query
+    # Use custom query if provided, otherwise build query based on type
+    if args.custom_query:
+        query = args.custom_query
+    elif args.type == "test_cases":
+        query = get_test_cases_query(args.pr, args.repo)
+    elif args.type == "curl":
+        query = get_curl_request_query(args.pr, args.repo)
     
-    print(f"query: {query}")
+    print(f"Running query: {query}")
     result = run_github_query(query)
     print(f"Result:\n{result}")
 
@@ -60,14 +115,8 @@ if __name__ == "__main__":
 # python github_agent.py --query="What are the changes in PR ID 3871 in repo: shopuptech/warehouse_mgmt_service ?"
 # python github_agent.py --query="How many stars does the repo: Mohan-Kumar-0018/rag-demo have?"
 
-# Sample Query for test case summary:
-"""What are the test cases added in PR 3843 in repo : shopuptech/warehouse_mgmt_service ?
-Give in Below format:
-File name: <file_name>
-Test cases added: 
- Failure cases:
-  Context: <context>
-  Error: <error>
- Success case:
-  Context: <context>
-  Asserted fields: <asserted_fields>"""
+# # To analyze test cases in PR 3843 for shopuptech/warehouse_mgmt_service
+# python github_agent.py --pr 3843 --repo shopuptech/warehouse_mgmt_service --type test_cases
+
+# # To get curl request examples from PR 1962 for shopuptech/sc2_admin
+# python github_agent.py --pr 1962 --repo shopuptech/sc2_admin --type curl
