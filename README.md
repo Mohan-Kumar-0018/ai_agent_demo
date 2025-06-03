@@ -15,6 +15,7 @@ The AI Agent Demo provides examples of how to:
 ### Main Components
 
 - **github_agent.py**: GitHub-specific agent with tools for repository operations
+- **postgres_agent.py**: PostgreSQL agent for database operations and queries
 - **agent.py**: Simple AI agent implementation
 - **requirements.txt**: Package dependencies
 - **prompts.txt**: Example prompts for the agents
@@ -58,6 +59,38 @@ result = run_github_query(pr_query)
 print(result)
 ```
 
+Command-line interface usage:
+
+```bash
+# Using default query
+python github_agent.py
+
+# Specifying a custom query
+python github_agent.py --query="How many stars does the repo: Mohan-Kumar-0018/rag-demo have?"
+
+# Using short form option
+python github_agent.py -q="What are the changes in PR ID 3871 in repo: shopuptech/warehouse_mgmt_service?"
+```
+
+### PostgreSQL Agent
+
+The PostgreSQL agent can perform database operations and answer natural language queries about data:
+- Query database tables
+- Analyze stock data
+- Generate insights from warehouse information
+- Perform complex SQL operations through natural language
+
+Example usage:
+
+```python
+# In postgres_agent.py
+query = "What are the top 3 best-selling products by quantity in last 5 days?"
+result = agent.run(query)
+print(result.content)
+```
+
+The PostgreSQL agent includes a modular run_postgres_query function and supports command-line execution for database operations and queries with detailed logging of all database operations.
+
 ### Simple Agent
 
 A basic agent for general AI tasks:
@@ -70,11 +103,12 @@ agent.print_response("Share a 2 sentence horror story")
 
 ## Tool Call Logging
 
-The GitHub agent implementation includes comprehensive tool call logging through hooks:
+The GitHub agent implementation includes comprehensive tool call logging through the built-in debug mode:
 
-- **on_tool_start**: Logs when a tool is invoked and its arguments
-- **on_tool_end**: Logs when a tool execution completes and its results
-- **on_tool_error**: Captures and logs any errors during tool execution
+- Enabled with the `debug_mode=True` parameter in the Agent initialization
+- Automatically logs tool invocations, inputs, and outputs
+- Provides detailed information about tool execution flow
+- Helps with debugging and understanding the agent's reasoning process
 
 ## Contributing
 
