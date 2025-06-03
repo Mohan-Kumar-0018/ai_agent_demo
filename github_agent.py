@@ -1,5 +1,6 @@
 import os
 import logging
+import argparse
 from dotenv import load_dotenv
 
 from agno.agent import Agent
@@ -32,7 +33,7 @@ github_agent = Agent(
     name="GitHub Agent",
     role="Perform various GitHub operations like fetching pull requests, stars, issues, etc.",
     model=OpenAIChat(id="gpt-4o"),
-    tools=[GithubTools(get_repository_stars=True, create_branch=True, get_pull_requests=True,get_pull_request_changes=True, get_pull_request_with_details=True, get_pull_request_comments=True)],
+    tools=[GithubTools(get_repository_stars=True, create_branch=True, get_pull_request_count=True,get_pull_requests=True,get_pull_request_changes=True, get_pull_request_with_details=True, get_pull_request_comments=True)],
     instructions="Help with GitHub operations including fetching repository information, pull requests, issues, etc.",
     show_tool_calls=True,
     tool_hooks={
@@ -58,16 +59,18 @@ def run_github_query(query):
     
     return response.content
 
-# Example usage
+# Command line interface
 if __name__ == "__main__":
-    # Example repository
-    repo = "shopuptech/warehouse_mgmt_service"
-    # repo = "Mohan-Kumar-0018/rag-demo"
+    # Set up argument parser
+    parser = argparse.ArgumentParser(description="GitHub Agent Query Interface")
+    parser.add_argument("--query", "-q", type=str, default="What is the status of the open PRs in repo: Mohan-Kumar-0018/rag-demo", 
+                        help="Specific query about the repository")
     
-    # Example 1: 
-    pr_query = f"What is the status of the PR 3870 in repo: {repo}"
-    pr_result = run_github_query(pr_query)
-    print(f"Branch created in {repo}: {pr_result}")
+    args = parser.parse_args()
     
+    query = args.query
+    
+    print(f"query: {query}")
+    result = run_github_query(query)
+    print(f"Result:\n{result}")
 
-    
