@@ -1,4 +1,3 @@
-import os
 import logging
 import argparse
 from dotenv import load_dotenv
@@ -60,3 +59,15 @@ if __name__ == "__main__":
 # python github_agent.py --query="What are the test cases added in PR 3871 in repo : shopuptech/warehouse_mgmt_service ?"
 # python github_agent.py --query="What are the changes in PR ID 3871 in repo: shopuptech/warehouse_mgmt_service ?"
 # python github_agent.py --query="How many stars does the repo: Mohan-Kumar-0018/rag-demo have?"
+
+# Sample Query for test case summary:
+"""What are the test cases added in PR 3843 in repo : shopuptech/warehouse_mgmt_service ?
+Give in Below format:
+File name: <file_name>
+Test cases added: 
+ Failure cases:
+  Context: <context>
+  Error: <error>
+ Success case:
+  Context: <context>
+  Asserted fields: <asserted_fields>"""
