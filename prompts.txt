@@ -1,0 +1,14 @@
+Tools:
+  Calculator
+  Crawl4ai
+  DuckDuckGo Search
+  GitHub
+  Gmail
+  Google Search
+  OpenWeather
+  Postgress
+  SQL
+  UserControlFlow
+  Youtube
+
+Instructions:
