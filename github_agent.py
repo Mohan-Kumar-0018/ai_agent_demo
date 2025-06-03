@@ -22,6 +22,7 @@ github_agent = Agent(
     tools=[GithubTools(get_repository_stars=True, create_branch=True, get_pull_request_count=True,get_pull_requests=True,get_pull_request_changes=True, get_pull_request_with_details=True, get_pull_request_comments=True)],
     instructions="Help with GitHub operations including fetching repository information, pull requests, issues, etc.",
     show_tool_calls=True,
+    debug_mode=True
 )
 
 def run_github_query(query):
@@ -58,3 +59,4 @@ if __name__ == "__main__":
 
 # python github_agent.py --query="What are the test cases added in PR 3871 in repo : shopuptech/warehouse_mgmt_service ?"
 # python github_agent.py --query="What are the changes in PR ID 3871 in repo: shopuptech/warehouse_mgmt_service ?"
+# python github_agent.py --query="How many stars does the repo: Mohan-Kumar-0018/rag-demo have?"
