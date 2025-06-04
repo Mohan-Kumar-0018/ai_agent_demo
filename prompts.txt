@@ -1,14 +1,29 @@
-Tools:
-  Calculator
-  Crawl4ai
-  DuckDuckGo Search
-  GitHub
-  Gmail
-  Google Search
-  OpenWeather
-  Postgress
-  SQL
-  UserControlFlow
-  Youtube
+Agent:
+Generate Python code that uses the Agno AI agent framework.
+Use OpenAIChat provided by openai model
+Then, use the agent to print the response for the prompt "Share a 2 sentence comedy story".
 
-Instructions:
+Use the following versions for agno and openai
+agno==1.5.6 and openai==1.83.0
+add packages to requirements.txt
+
+
+Postgres Agent:
+
+Generate Python code using the Agno AI agent framework.
+
+1. Use the PostgresTools tool with the following credentials:
+    user: postgres
+    password: postgres
+    host: localhost
+    port: 5432
+    db_name: stock_demo
+
+2. Create an agent named "StockDemoAI" using the gpt-4o model from OpenAI with the description: "An AI agent that can query stock data and perform database operations."
+
+3. Add the Postgres tool to the agent’s tool list and enable show_tool_calls.
+
+4. Finally, run the agent with this natural language query:
+    "What are top 2 warehouses with highest orders count? Give me the warehouse name and the count of orders."
+
+5. Print the agent's response to the terminal.
