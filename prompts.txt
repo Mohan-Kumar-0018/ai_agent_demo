@@ -1,61 +1,29 @@
-🎤 Slide 1: What’s Beyond LLMs & RAG?
-Prompt:
-“You’ve seen what LLMs can do with static prompts and retrieval-augmented generation. But what if they could act—query databases, call APIs, update files, and collaborate across tools?”
+Agent:
+Generate Python code that uses the Agno AI agent framework.
+Use OpenAIChat provided by openai model
+Then, use the agent to print the response for the prompt "Share a 2 sentence comedy story".
 
-Core Idea:
-LLMs give us reasoning, but AI agents give us action + memory + autonomy.
-
-🧠 Slide 2: What is an AI Agent (in practice)?
-Definition (framed for engineers):
-“An AI agent is an LLM-powered software entity that can reason, plan, and interact with external tools or systems to complete tasks, often autonomously.”
-
-🔑 Key Capabilities:
-Tool usage (e.g., GitHub APIs, PostgreSQL, custom functions)
-
-Goal-driven planning
-
-Autonomous or semi-autonomous decision-making
-
-Chaining actions over multiple steps
-
-🧰 Slide 3: Why Use an Agent Framework like Agno?
-“Rather than building fragile prompt chains, Agno helps you define tools, orchestrate reasoning, and manage execution in a reusable, extensible way.”
-
-📦 Agno Features:
-Tool registration (e.g., GitHubTools, PostgresTools)
-
-Contextual execution
-
-Reasoning + planning loop
-
-Custom agent types
-
-Integration flexibility
-
-⚙️ Slide 4: Typical Agent Loop
-mermaid
-Copy
-Edit
-flowchart TD
-    Start([Start])
-    Think([Think: What is the task?])
-    Plan([Plan: What tool or step is needed?])
-    Act([Act: Use tool/API])
-    Repeat([Loop until done])
-    Done([Task complete])
-
-    Start --> Think --> Plan --> Act --> Repeat --> Plan
-    Repeat --> Done
-🎬 Slide 5: What I’ll Show You Today
-You can end the intro with a brief roadmap:
-
-“In this demo, I’ll show agents that:
-
-Pull issues from GitHub
-
-Query a PostgreSQL database
-
-Use a custom tool to [e.g., crawl or do a calculation]
-You’ll see how they reason, choose tools, and act to accomplish a task end-to-end.”
+Use the following versions for agno and openai
+agno==1.5.6 and openai==1.83.0
+add packages to requirements.txt
 
 
+Postgres Agent:
+
+Generate Python code using the Agno AI agent framework.
+
+1. Use the PostgresTools tool with the following credentials:
+    user: postgres
+    password: postgres
+    host: localhost
+    port: 5432
+    db_name: stock_demo
+
+2. Create an agent named "StockDemoAI" using the gpt-4o model from OpenAI with the description: "An AI agent that can query stock data and perform database operations."
+
+3. Add the Postgres tool to the agent’s tool list and enable show_tool_calls.
+
+4. Finally, run the agent with this natural language query:
+    "What are top 2 warehouses with highest orders count? Give me the warehouse name and the count of orders."
+
+5. Print the agent's response to the terminal.
