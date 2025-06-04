@@ -1,14 +1,61 @@
-Tools:
-  Calculator
-  Crawl4ai
-  DuckDuckGo Search
-  GitHub
-  Gmail
-  Google Search
-  OpenWeather
-  Postgress
-  SQL
-  UserControlFlow
-  Youtube
+🎤 Slide 1: What’s Beyond LLMs & RAG?
+Prompt:
+“You’ve seen what LLMs can do with static prompts and retrieval-augmented generation. But what if they could act—query databases, call APIs, update files, and collaborate across tools?”
 
-Instructions:
+Core Idea:
+LLMs give us reasoning, but AI agents give us action + memory + autonomy.
+
+🧠 Slide 2: What is an AI Agent (in practice)?
+Definition (framed for engineers):
+“An AI agent is an LLM-powered software entity that can reason, plan, and interact with external tools or systems to complete tasks, often autonomously.”
+
+🔑 Key Capabilities:
+Tool usage (e.g., GitHub APIs, PostgreSQL, custom functions)
+
+Goal-driven planning
+
+Autonomous or semi-autonomous decision-making
+
+Chaining actions over multiple steps
+
+🧰 Slide 3: Why Use an Agent Framework like Agno?
+“Rather than building fragile prompt chains, Agno helps you define tools, orchestrate reasoning, and manage execution in a reusable, extensible way.”
+
+📦 Agno Features:
+Tool registration (e.g., GitHubTools, PostgresTools)
+
+Contextual execution
+
+Reasoning + planning loop
+
+Custom agent types
+
+Integration flexibility
+
+⚙️ Slide 4: Typical Agent Loop
+mermaid
+Copy
+Edit
+flowchart TD
+    Start([Start])
+    Think([Think: What is the task?])
+    Plan([Plan: What tool or step is needed?])
+    Act([Act: Use tool/API])
+    Repeat([Loop until done])
+    Done([Task complete])
+
+    Start --> Think --> Plan --> Act --> Repeat --> Plan
+    Repeat --> Done
+🎬 Slide 5: What I’ll Show You Today
+You can end the intro with a brief roadmap:
+
+“In this demo, I’ll show agents that:
+
+Pull issues from GitHub
+
+Query a PostgreSQL database
+
+Use a custom tool to [e.g., crawl or do a calculation]
+You’ll see how they reason, choose tools, and act to accomplish a task end-to-end.”
+
+
