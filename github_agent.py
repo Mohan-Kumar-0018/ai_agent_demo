@@ -101,14 +101,11 @@ if __name__ == "__main__":
     parser.add_argument("--repo", type=str, required=True, help="Repository name (format: owner/repo)")
     parser.add_argument("--type", type=str, choices=["test_cases", "curl"], required=True, 
                       help="Query type: 'test_cases' for test case analysis, 'curl' for curl request examples")
-    parser.add_argument("--custom-query", type=str, help="Run a custom query instead of the predefined ones")
     
     args = parser.parse_args()
     
-    # Use custom query if provided, otherwise build query based on type
-    if args.custom_query:
-        query = args.custom_query
-    elif args.type == "test_cases":
+    # Build query based on type
+    if args.type == "test_cases":
         query = get_test_cases_query(args.pr, args.repo)
     elif args.type == "curl":
         query = get_curl_request_query(args.pr, args.repo)
@@ -118,9 +115,7 @@ if __name__ == "__main__":
     print(f"Result:\n{result}")
 
 
-# python github_agent.py --query="What are the test cases added in PR 3871 in repo : shopuptech/warehouse_mgmt_service ?"
-# python github_agent.py --query="What are the changes in PR ID 3871 in repo: shopuptech/warehouse_mgmt_service ?"
-# python github_agent.py --query="How many stars does the repo: Mohan-Kumar-0018/rag-demo have?"
+
 
 # # To analyze test cases in PR 3843 for shopuptech/warehouse_mgmt_service
 # python github_agent.py --pr 3843 --repo shopuptech/warehouse_mgmt_service --type test_cases
