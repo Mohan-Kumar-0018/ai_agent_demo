@@ -3,3 +3,4 @@ openai==1.83.0
 python-dotenv
 psycopg2
 pygithub
+duckduckgo-search
