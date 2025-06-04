@@ -1,16 +1,9 @@
-import argparse
-import logging
-
 from agno.agent import Agent
 from agno.team.team import Team
 from agno.tools.postgres import PostgresTools
 from agno.tools.reasoning import ReasoningTools
 from agno.tools.duckduckgo import DuckDuckGoTools
 from agno.models.openai import OpenAIChat
-
-# Set up logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
 
 # Step 1: Initialize PostgresTools with your database connection info
 postgres_tool = PostgresTools(
