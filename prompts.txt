@@ -27,3 +27,23 @@ Generate Python code using the Agno AI agent framework.
     "What are top 2 warehouses with highest orders count? Give me the warehouse name and the count of orders."
 
 5. Print the agent's response to the terminal.
+
+
+Github Agent:
+
+Generate Python code using the Agno AI agent framework.
+
+1. Create an agent name "GithubAgent" using the gpt-4o model from OpenAI with the description: 
+role: Perform various GitHub operations like fetching pull requests, stars, issues, etc.
+instructions: Help with GitHub operations including fetching repository information, pull requests, issues, etc.
+2. Use GithubTools provided by agno.tools.github and add the following tools from GithubTools
+    get_repository_stars
+    get_pull_request_count
+    get_pull_requests
+    get_pull_request_changes
+    get_pull_request_with_details
+    get_pull_request_comments
+3. Add load_dotenv to load env variable for GITHUB_ACCESS_TOKEN
+4. Agent should run the following query:
+    "How many open pull requests are there in the repo: shopuptech/warehouse_mgmt_service"
+5. Print the agent's response to the terminal.

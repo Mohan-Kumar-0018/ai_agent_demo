@@ -18,7 +18,14 @@ github_agent = Agent(
     name="GitHub Agent",
     role="Perform various GitHub operations like fetching pull requests, stars, issues, etc.",
     model=OpenAIChat(id="gpt-4o"),
-    tools=[GithubTools(get_repository_stars=True, create_branch=True, get_pull_request_count=True,get_pull_requests=True,get_pull_request_changes=True, get_pull_request_with_details=True, get_pull_request_comments=True)],
+    tools=[GithubTools(
+        get_repository_stars=True,
+        get_pull_request_count=True,
+        get_pull_requests=True,
+        get_pull_request_changes=True,
+        get_pull_request_with_details=True,
+        get_pull_request_comments=True
+    )],
     instructions="Help with GitHub operations including fetching repository information, pull requests, issues, etc.",
     show_tool_calls=True,
     debug_mode=True
