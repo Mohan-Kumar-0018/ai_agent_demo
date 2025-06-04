@@ -47,3 +47,6 @@ Github Agent:
 "Get the latest PR in repo: shopuptech/warehouse_mgmt_service? Who is the author of the PR? What is the title of the PR?"
 6.Print the agent's result to the terminal.
 
+Sample queries:
+    query = "How many open PRs are there in the repo: Mohan-Kumar-0018/rag-demo ?"
+    query = "Get the last 5 PR in repo: shopuptech/warehouse_mgmt_service , Give the summary of each PR, the author of the PR and the title of the PR. Give in below format: PR ID: <pr_id> Author: <author> PR Title: <title> PR Summary: <summary> PR Description: <description> PR Files: <files> PR Status: <status> PR Comments: <comments>"
