@@ -31,19 +31,19 @@ Generate Python code using the Agno AI agent framework.
 
 Github Agent:
 
-Generate Python code using the Agno AI agent framework.
-
-1. Create an agent name "GithubAgent" using the gpt-4o model from OpenAI with the description: 
-role: Perform various GitHub operations like fetching pull requests, stars, issues, etc.
-instructions: Help with GitHub operations including fetching repository information, pull requests, issues, etc.
-2. Use GithubTools provided by agno.tools.github and add the following tools from GithubTools
+1. Generate a Python script using the Agno AI agent framework to interact with GitHub using the GitHubTools module.
+2 Load environment variables using dotenv, especially for GITHUB_ACCESS_TOKEN.
+3. Create an agent named "GitHub Agent" using the gpt-4o model from OpenAI with the following:
+    Role: "Perform various GitHub operations like fetching pull requests, stars, issues, etc."
+    Description/instructions: "Help with GitHub operations including fetching repository information, pull requests, issues, etc."
+4. Attach GithubTools to the agent with all of the following tools enabled:
     get_repository_stars
     get_pull_request_count
     get_pull_requests
     get_pull_request_changes
     get_pull_request_with_details
     get_pull_request_comments
-3. Add load_dotenv to load env variable for GITHUB_ACCESS_TOKEN
-4. Agent should run the following query:
-    "How many open pull requests are there in the repo: shopuptech/warehouse_mgmt_service"
-5. Print the agent's response to the terminal.
+5. Finally, run the agent with this query:
+"Get the latest PR in repo: shopuptech/warehouse_mgmt_service? Who is the author of the PR? What is the title of the PR?"
+6.Print the agent's result to the terminal.
+
