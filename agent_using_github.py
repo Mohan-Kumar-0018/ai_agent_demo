@@ -26,6 +26,10 @@ github_agent = Agent(
 )
 
 if __name__ == "__main__":
-    query = "How many stars does the repo: Mohan-Kumar-0018/rag-demo have?"
+    # shopuptech/warehouse_mgmt_service 
+    # shopuptech/sc2_admin
+    # query = "How many stars are there in the repo: Mohan-Kumar-0018/rag-demo have?"
+    # query = "How many open PRs are there in the repo: Mohan-Kumar-0018/rag-demo ?"
+    query = "Get the latest PR in repo: shopuptech/warehouse_mgmt_service ? WHo is the author of the PR? What is the title of the PR?"
     result = github_agent.run(query)
     print(result.content)
