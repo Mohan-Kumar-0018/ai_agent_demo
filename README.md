@@ -8,15 +8,18 @@ The AI Agent Demo provides examples of how to:
 - Create and configure an AI agent with specific tools
 - Implement GitHub operations using the OpenAI API
 - Track and log tool calls made by the agent
-- Execute queries against repositories
+- Execute queries against repositories and databases
 
 ## Components
 
 ### Main Components
 
 - **github_agent.py**: GitHub-specific agent with tools for repository operations
-- **postgres_agent.py**: PostgreSQL agent for database operations and queries
+- **agent_using_postgres.py**: PostgreSQL agent for database operations and queries
 - **agent.py**: Simple AI agent implementation
+- **agent_using_github.py**: Another GitHub agent implementation example
+- **multi_agent.py**: Implementation of multiple agents working together
+- **own_agent.py**: Custom agent implementation
 - **requirements.txt**: Package dependencies
 - **prompts.txt**: Example prompts for the agents
 
@@ -42,13 +45,17 @@ The AI Agent Demo provides examples of how to:
 
 ### GitHub Agent
 
-The GitHub agent can perform various operations on GitHub repositories:
-- Fetch pull request details
-- Get repository stars
-- Create branches
-- View pull request changes and comments
+The GitHub agent (`github_agent.py`) provides a specialized interface for GitHub repository operations, focusing on PR analysis:
 
-Example usage:
+- Fetch pull request details and changes
+- Get repository stars and PR counts
+- View pull request comments
+- Extract test cases from pull requests
+- Generate curl requests for APIs added or modified in a PR
+
+The agent is implemented using the Agno framework and OpenAI's GPT-4o model with detailed tool logging.
+
+Example usage in Python code:
 
 ```python
 from github_agent import run_github_query
@@ -62,15 +69,29 @@ print(result)
 Command-line interface usage:
 
 ```bash
-# Using default query
-python github_agent.py
+# For analyzing test cases in a PR
+python github_agent.py --pr 3843 --repo shopuptech/warehouse_mgmt_service --type test_cases
 
-# Specifying a custom query
-python github_agent.py --query="How many stars does the repo: Mohan-Kumar-0018/rag-demo have?"
-
-# Using short form option
-python github_agent.py -q="What are the changes in PR ID 3871 in repo: shopuptech/warehouse_mgmt_service?"
+# For generating curl requests from a PR
+python github_agent.py --pr 1962 --repo shopuptech/sc2_admin --type curl
 ```
+
+Note: The GitHub agent CLI has been simplified to include only two options: `test_cases` and `curl`, requiring three mandatory arguments: `--pr` (Pull Request ID), `--repo` (Repository name), and `--type` (with only "test_cases" and "curl" as valid choices).
+
+#### Test Case Analysis
+
+When using the `test_cases` option, the agent will analyze a PR and return structured information about added test cases including:
+- File names with test additions
+- Failure test cases with context and error expectations
+- Success test cases with context and asserted fields
+
+#### Curl Request Generation
+
+When using the `curl` option, the agent will analyze API changes in a PR and generate sample curl commands with:
+- Properly formatted curl syntax
+- Appropriate headers and cookies
+- Base URL and endpoint path
+- Required parameters
 
 ### PostgreSQL Agent
 
@@ -83,13 +104,45 @@ The PostgreSQL agent can perform database operations and answer natural language
 Example usage:
 
 ```python
-# In postgres_agent.py
-query = "What are the top 3 best-selling products by quantity in last 5 days?"
+# In agent_using_postgres.py
+query = "What are top 2 warehouses with highest orders count?"
 result = agent.run(query)
 print(result.content)
 ```
 
-The PostgreSQL agent includes a modular run_postgres_query function and supports command-line execution for database operations and queries with detailed logging of all database operations.
+### Multi-Agent Team
+
+The `multi_agent.py` file demonstrates how to build a team of specialized agents working together to solve complex tasks. This implementation shows the power of combining multiple AI agents with different capabilities into a cohesive system.
+
+#### Team Components
+
+1. **StockDemoAI** - Database specialist that queries stock data
+   - Uses PostgresTools to connect to a local PostgreSQL database
+   - Specializes in inventory and warehouse data analysis
+
+2. **WebSearchAI** - Search specialist using DuckDuckGo
+   - Performs web searches to gather external information
+   - Extracts relevant data from search results
+
+3. **ProductReasoningAI** - Coordinating team agent
+   - Combines insights from both specialized agents
+   - Uses ReasoningTools for advanced analysis
+   - Implemented with GPT-4.1 model for sophisticated reasoning
+
+#### Example Usage
+
+```python
+# In multi_agent.py
+query = "What are top 2 products with highest orders count? Give me the warehouse name and the product name. Find the top seller in corresponding warehouse location for those products."
+
+reason_agent.print_response(query,
+    stream=True,
+    show_full_reasoning=True,
+    stream_intermediate_steps=True,
+)
+```
+
+The multi-agent approach allows for complex queries that require both internal data analysis and external information gathering, providing more comprehensive insights than any single agent could deliver alone.
 
 ### Simple Agent
 
