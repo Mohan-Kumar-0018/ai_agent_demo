@@ -50,3 +50,54 @@ Github Agent:
 Sample queries:
     query = "How many open PRs are there in the repo: Mohan-Kumar-0018/rag-demo ?"
     query = "Get the last 5 PR in repo: shopuptech/warehouse_mgmt_service , Give the summary of each PR, the author of the PR and the title of the PR. Give in below format: PR ID: <pr_id> Author: <author> PR Title: <title> PR Summary: <summary> PR Description: <description> PR Files: <files> PR Status: <status> PR Comments: <comments>"
+
+
+Postgres Tables:
+
+1. Table : warehouses
+    Columns : id, name, location, manager
+2. Table : products
+    Columns : id, name, code, price
+3. Table : orders
+    Columns : id, product_id, warehouse_id, quantity, order_date
+4. Table : stock
+    Columns : id, product_id, warehouse_id, quantity
+
+Give create table queries for the above tables in postgres.
+
+1. Table : warehouses
+    Columns : id, name, location, manager    
+    Use locations as Chennai, Bengaluru, Hyderabad, Mumbai, Kolkata.
+    Use managers as Mohan, Selva, Raj, Soorya, Subash.
+    Use warehouse names based on location name.
+    Give 5 insert queries for the above table.
+
+2. Table : products
+    Columns : id, name, code, price
+    Give 5 insert queries for the above table.
+    Use these products:
+    Voltas 1.5 Ton 3 Star Inverter Split AC (183V Vectra CAW)
+    Daikin 1.5 Ton 3 Star Inverter Split AC (MTKL50U)
+    LG 1.5 Ton 5 Star AI Dual Inverter Split AC (TS-Q19YNZE)
+    Panasonic 1.5 Ton 5 Star Wi-Fi Inverter Smart Split AC (CS/CU-NU18ZKY5W)
+    Godrej 1.5 Ton 5 Star 5-in-1 Convertible Inverter Split AC (EI 18IINV5R32 WYS)
+
+
+3. Table : orders
+    Columns : id, product_id, warehouse_id, quantity, order_date
+    Use product id 1-5 and warehouse id 1-5.
+    Use quantity between 5-50.
+    Use order_date as last 5 days.
+    Give 20 insert queries for the above table.
+    
+
+4. Table : stock
+    Columns : id, product_id, warehouse_id, quantity
+    Use product id 1-5 and warehouse id 1-5.
+    Use quantity between 5-50.
+    Give 20 insert queries for the above table.
+    
+
+
+
+
